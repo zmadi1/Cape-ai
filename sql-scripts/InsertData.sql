@@ -1,1 +1,0 @@
-INSERT INTO zakhele.users (first_name,last_name,funniest_joke) VALUES ("Zakhele","Madi","What did C++ say to C?. You have no class.");
