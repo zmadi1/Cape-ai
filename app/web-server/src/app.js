@@ -1,21 +1,14 @@
 const path = require('path')
+
 const express = require('express');
-
-const geocode = require('./utilities/geocode')
-
-const forecast = require('./utilities/forecast')
-// const query = require('../model.js');
 
 const port = process.env.PORT || 3000;
 
 const hbs = require('hbs');
-const {
-    send
-} = require('process');
+const mysql = require('mysql');
 
 
-// console.log(__dirname);
-// console.log(path.join(__dirname,'../public'));
+
 
 //Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public');
@@ -34,40 +27,16 @@ hbs.registerPartials(partialsPath)
 
 //setup static directory to serve
 app.use(express.static(publicDirectoryPath)); //we use this when 
-//we are handling static html files(in public folder)
-// app.set('views', __dirname + '/views');
 
 
-app.get('', (req, res) => { //we use this when we're handling dynamic html files
+
+app.get('', (req, res) => {
     res.render('index', {
-        title: 'WeatherApp',
-        name: 'Zakhele Madi'
-    })
-})
-
-app.get('/products', (req, res) => {
-
-    if (!req.query.search) {
-        return res.send({
-            error: 'You must provide a search term'
-        })
-    }
-    console.log(req.query.search);
-    res.send({
-        product: []
-    })
-})
-
-app.get('/help', (req, res) => {
-    res.render('help', {
-        helpText: 'This is some helpful text',
+        title: 'My amazing landing page',
         name: 'Zakhele',
-        title: 'Help'
+
     })
 })
-
-var mysql = require('mysql');
-
 
 
 
@@ -98,7 +67,8 @@ app.get('/about', async (req, res) => {
             res.render('about', {
                 first_name: first_name,
                 last_name: last_name,
-                funniest_joke: funniest_joke
+                funniest_joke: funniest_joke,
+                name: first_name
             });
         } catch (error) {
             console.log(error)
@@ -106,20 +76,13 @@ app.get('/about', async (req, res) => {
                 error: error
             });
         }
-    }
-    catch (error) {
-        res.render('about', { first_name: error });
+    } catch (error) {
+        res.render('about', {
+            first_name: error
+        });
     }
 });
 
-app.get('/help/*', (req, res) => {
-    res.render('404', {
-        title: '404',
-        nam: 'Zakhele',
-        errorMessage: 'Help article not found'
-
-    })
-})
 
 app.get('*', (req, res) => {
     res.render('404', {
