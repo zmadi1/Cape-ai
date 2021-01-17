@@ -1,0 +1,1 @@
+INSERT INTO zakhele.users (first_name,last_name,funniest_joke) VALUES ("Zakhele","Madi","jesus was the true embodiment of the saying live by the sword, die by the sword. Except in his case, he was a carpenter.... I nailed it right?");
